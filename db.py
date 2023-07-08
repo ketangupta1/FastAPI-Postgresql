@@ -4,8 +4,8 @@ from config import *
 
 # Connect to the PostgreSQL database
 conn = psycopg2.connect(
-    host="localhost",
-    database="my_db",
+    host=HOST,
+    database=DB,
     user=USER,
     password=PASSWORD
 )
@@ -14,7 +14,9 @@ conn = psycopg2.connect(
 # Create a cursor object to execute SQL queries
 cur = conn.cursor()
 
-
+# Creating the source_data table
+# Since in /add_data endpoint request body doe not contains source_id. 
+# so I thought it should be auto generated so used SERIAL datatype for source_id
 def create_table():
     cur.execute("""
         CREATE TABLE IF NOT EXISTS source_data (
